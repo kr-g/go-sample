@@ -10,8 +10,8 @@ echo goroot $GOROOT
 cd $BDIR/repo/go-sample/webapp-static
 go run main.go &
 
-#cd $BDIR/repo/go-sample/webapp-static-markdown
-#go run main.go &
+cd $BDIR/repo/go-sample/webapp-static-markdown
+go run main.go &
 
 
 vmstat 5
