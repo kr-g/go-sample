@@ -1,7 +1,7 @@
 FROM golang:1.8.1
 
 RUN apt-get update
-RUN apt-get install -y sudo git
+RUN apt-get install -y sudo git markdown
 
 ADD *.sh /
 RUN chmod +x /*.sh
