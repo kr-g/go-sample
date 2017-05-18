@@ -16,7 +16,7 @@ mapp.config([ '$routeProvider', function($routeProvider) {
 mapp.controller('getalldata', [ '$scope', '$http', function($scope, $http, $uibModal ) {
 	
 	$scope.refresh = function(){
-		$http.get('http://localhost:8082/resttlds').then(function(response) {
+		$http.get('/resttlds').then(function(response) {
 			$scope.alldata = response.data;
 		});
 	};
@@ -26,7 +26,7 @@ mapp.controller('getalldata', [ '$scope', '$http', function($scope, $http, $uibM
 		var uid = $scope.alldata[ index ].Id;
 		console.log( "del " + uid );
 		
-		$http.delete('http://localhost:8082/resttlds/' + uid ).then(function(response) {
+		$http.delete('/resttlds/' + uid ).then(function(response) {
 			$scope.refresh();
 		});
 	};
@@ -38,7 +38,7 @@ mapp.controller('getalldata', [ '$scope', '$http', function($scope, $http, $uibM
 		console.log( "inc " + uid );
 		$scope.obj = $scope.alldata[ index ];
 		
-		$http.post('http://localhost:8082/resttlds/' + uid, JSON.stringify( $scope.alldata[ index ] ) ).then(function(response) {
+		$http.post('/resttlds/' + uid, JSON.stringify( $scope.alldata[ index ] ) ).then(function(response) {
 			$scope.refresh();
 		});
 	};
@@ -52,7 +52,7 @@ mapp.controller('getalldata', [ '$scope', '$http', function($scope, $http, $uibM
 		console.log( "dec " + uid );
 		$scope.obj = $scope.alldata[ index ];
 		
-		$http.post('http://localhost:8082/resttlds/' + uid, JSON.stringify( $scope.alldata[ index ] ) ).then(function(response) {
+		$http.post('/resttlds/' + uid, JSON.stringify( $scope.alldata[ index ] ) ).then(function(response) {
 			$scope.refresh();
 		});
 	};
@@ -61,7 +61,7 @@ mapp.controller('getalldata', [ '$scope', '$http', function($scope, $http, $uibM
 
 		console.log( "save " , obj );
 				
-		$http.post('http://localhost:8082/resttlds/' + obj.Id, JSON.stringify( obj ) ).then(function(response) {
+		$http.post('/resttlds/' + obj.Id, JSON.stringify( obj ) ).then(function(response) {
 			$scope.refresh();
 		});
 	};
