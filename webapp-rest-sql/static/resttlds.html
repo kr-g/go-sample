@@ -1,0 +1,78 @@
+<div ng-controller="getalldata as $gad">
+
+	<div ng-controller="ModalDemoCtrl as $ctrl" class="modal-demo">
+	
+	    <script type="text/ng-template" id="myModalConfirm.html">
+	      <div class="modal-header">
+	        <h3 class="modal-title" id="modal-title"> Delete </h3>
+	      </div>
+	      <div class="modal-body" id="modal-body">
+	        Please confirm to delete !
+			No {{ $ctrl.obj.Id }}
+	      </div>
+	      <div class="modal-footer">
+	        <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+	        <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+	      </div>
+	    </script>
+
+	    <script type="text/ng-template" id="myModalEdit.html">
+	      <div class="modal-header">
+	        <h3 class="modal-title" id="modal-title"> Edit </h3>
+	      </div>
+	      <div class="modal-body" id="modal-body">
+	        Please confirm to edit ! 
+			<span ng-if="$ctrl.obj.Id!=''" > {{ $ctrl.obj.Id }} </span><br/>
+			<input type="text" ng-model="$ctrl.obj.Name">
+			<input type="text" ng-model="$ctrl.obj.Tld">
+			<span ng-if="$ctrl.obj.Count && $ctrl.obj.Count > 0" > Count {{ $ctrl.obj.Count }} <span/>
+			
+	      </div>
+	      <div class="modal-footer">
+	        <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+	        <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+	      </div>
+	    </script>
+		
+		<button class="btn btn-default glyphicon glyphicon-refresh" ng-click="refresh()" title="reload"></button>	
+		<button class="btn btn-default glyphicon glyphicon-plus" ng-click="$ctrl.newentry()" title="new entry"></button>
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>Country</th>
+					<th>Tld</th>
+					<th>Count</th>
+					<th>action</th>
+					<th>+1</th>
+					<th>-1</th>
+				</tr>
+			</thead>
+	  		<tbody>
+				<tr ng-repeat="kv in alldata">
+		   		  	<th scope="row">{{ kv.Id }}</th>
+					<td>{{kv.Name}}</td>
+					<td>{{kv.Tld}}</td>
+					<td>{{kv.Count}}</td>
+					<td>
+						<button class="btn btn-danger glyphicon glyphicon-remove" ng-click="$ctrl.remove( $index );" title="remove"></button>
+						<button class="btn btn-default glyphicon glyphicon-pencil" ng-click="$ctrl.edit( $index );" title="edit"></button>
+					</td>
+					<td>
+						<button class="btn btn-default" ng-click="inc( $index );">+1</button>
+					</td>
+					<td>
+						<button class="btn btn-default" ng-click="dec( $index );">-1</button>
+					</td>
+				</tr>	
+			</tbody>
+		</table>
+
+	</div>
+	
+	<div>
+		{{ obj.Id }} {{ obj.Name }}
+	</div>
+
+</div>
