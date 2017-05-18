@@ -7,11 +7,14 @@ echo path $PATH
 echo goroot $GOROOT
 
 
-cd $BDIR/repo/go-sample/webapp-static
-go run main.go &
+for i in $BDIR/repo/go-sample/webapp-* 
+do 
 
-cd $BDIR/repo/go-sample/webapp-static-markdown
-go run main.go &
+	echo $i
+	cd $i 
+	go run main.go &
+
+done
 
 
 vmstat 5
