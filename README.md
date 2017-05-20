@@ -17,4 +17,8 @@ https://another-software-development-blog.blogspot.com/2017/05/go-lang-part-3.ht
 
 http://another-software-development-blog.blogspot.com/2017/05/go-lang-part-4.html
 
+## go-lang running as native opengl app on android
+
+http://another-software-development-blog.blogspot.com/2017/05/go-lang-part-5.html
+
 
