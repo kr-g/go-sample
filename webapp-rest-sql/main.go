@@ -124,14 +124,14 @@ func handlerRestTld(w http.ResponseWriter, r *http.Request) {
 	custid := strings.Trim(strings.Replace(r.URL.Path, "/resttlds/", "", 1), " ")
 	fmt.Println("custid", custid)
 
-	where := ""
-	if len(custid) > 0 {
-		where = fmt.Sprintf(" where id ='%v'", custid)
-	}
-
 	switch r.Method {
 	case http.MethodGet:
-		rows, err := db.Query("select * from tlds" + where)
+		var rows *sql.Rows
+		if len(custid) > 0 {
+			rows, err = db.Query("select * from tlds where id=?", custid)
+		} else {
+			rows, err = db.Query("select * from tlds")
+		}
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -256,10 +256,22 @@ func handlerRestTld(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		_, err = db.Exec("delete from tlds" + where)
+		tx, err := db.Begin()
 		if err != nil {
 			log.Fatal(err)
 		}
+		stmt, err := tx.Prepare("delete from tlds where id=?")
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer stmt.Close()
+
+		_, err = stmt.Exec(custid)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		tx.Commit()
 
 		// create the response
 		resp, err := json.Marshal(Status{true, 0})
